@@ -8,8 +8,9 @@ import BlogArticleCard from '../../components/shared/BlogArticleCard'
 
 // METADATA ========================================
 type Props = {
-	params: any
-	slug: string
+	params: {
+		slug: string
+	}
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	}
 }
 
-const getSinglePost = async (params: Props) => {
+const getSinglePost = async (params: Props['params']) => {
 	const res = await fetch(
 		`https://eu-west-2.cdn.hygraph.com/content/${process.env.CMS_API_KEY}/master`,
 		{
