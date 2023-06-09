@@ -7,7 +7,7 @@ import Image from 'next/image'
 import BlogArticleCard from '../../components/shared/BlogArticleCard'
 
 // METADATA ========================================
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: any) {
 	const post = await getSinglePost(params)
 
 	if (post) {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 	}
 }
 
-const getSinglePost = async (params) => {
+const getSinglePost = async (params: any) => {
 	const res = await fetch(
 		`https://eu-west-2.cdn.hygraph.com/content/${process.env.CMS_API_KEY}/master`,
 		{
@@ -86,7 +86,7 @@ const getSinglePost = async (params) => {
 	return data.post
 }
 
-export default async function BlogArticle({ params }) {
+export default async function BlogArticle({ params }: any) {
 	const post = await getSinglePost(params)
 
 	if (!post) {
