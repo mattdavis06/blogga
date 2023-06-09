@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Fragment } from 'react'
 import sanitizeHtml from 'sanitize-html'
@@ -7,7 +6,7 @@ import Image from 'next/image'
 import BlogArticleCard from '../../components/shared/BlogArticleCard'
 
 // METADATA ========================================
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: any | null) {
 	const post = await getSinglePost(params)
 
 	if (post) {
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: any) {
 	}
 }
 
-const getSinglePost = async (params: any) => {
+const getSinglePost = async (params: any | null) => {
 	const res = await fetch(
 		`https://eu-west-2.cdn.hygraph.com/content/${process.env.CMS_API_KEY}/master`,
 		{
@@ -86,7 +85,7 @@ const getSinglePost = async (params: any) => {
 	return data.post
 }
 
-export default async function BlogArticle({ params }: any) {
+export default async function BlogArticle({ params }: any | null) {
 	const post = await getSinglePost(params)
 
 	if (!post) {
